@@ -5,6 +5,23 @@ import { basicAuth } from 'hono/basic-auth'
 import { getExtension } from 'hono/utils/mime'
 import * as z from 'zod'
 
+const generateShortId = () => {
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+  let result = ''
+  for (let i = 0; i < 6; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return result
+}
+
+const getDatedPath = () => {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  return `${year}/${month}/${day}`
+}
+
 const maxAge = 60 * 60 * 24 * 30
 
 const app = new Hono<{ Bindings: Cloudflare.Env }>()
@@ -21,12 +38,14 @@ app.put('/upload', async (c) => {
   const type = data.image.type
   const extension = getExtension(type) ?? 'png'
 
+  const datedPath = getDatedPath()
+  const shortId = generateShortId()
+  
   let key
-
   if (data.width && data.height) {
-    key = (await sha256(await body.text())) + `_${data.width}x${data.height}` + '.' + extension
+    key = `${datedPath}/${shortId}_${data.width}x${data.height}.${extension}`
   } else {
-    key = (await sha256(await body.text())) + '.' + extension
+    key = `${datedPath}/${shortId}.${extension}`
   }
 
   await c.env.BUCKET.put(key, body, { httpMetadata: { contentType: type } })
