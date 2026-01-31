@@ -37,7 +37,7 @@ app.put('/upload', async (c) => {
 app.get(
   '*',
   cache({
-    cacheName: 'r2-image-worker'
+    cacheName: 'cdn-img-fluffy'
   })
 )
 
