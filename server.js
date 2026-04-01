@@ -67,17 +67,63 @@ const upload = multer({ storage: multer.memoryStorage() })
 // Root page: simple landing similar to the Cloudflare worker
 app.get('/', (req, res) => {
   res.send(`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fluffy Images (Node)</title>
-  </head>
-  <body style="font-family: system-ui, Arial; text-align:center; padding:2rem;"> 
-    <h1>Fluffy Images (Node)</h1>
-    <p>This is a local storage image hosting service backed by a Node.js app.</p>
-  </body>
-  </html>`)
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluffy Images</title>
+  <meta name="description" content="This service provides hosting for images">
+  <link rel="shortcut icon" href="https://pub-a4443e381b024b27a2b33c5ed3c0d88e.r2.dev/fi_icon.png">
+  <meta property="og:title" content="Fluffy Images">
+  <meta property="og:description" content="This service provides hosting for images">
+  <meta property="og:url" content="https://i.fluffynet.dev">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://pub-a4443e381b024b27a2b33c5ed3c0d88e.r2.dev/fi_icon.png">
+  <meta property="og:image:alt" content="Fluffy Images">
+  <meta property="og:site_name" content="Fluffy Images">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Fluffy Images">
+  <meta name="twitter:description" content="This service provides hosting for images">
+  <meta name="twitter:image" content="https://pub-a4443e381b024b27a2b33c5ed3c0d88e.r2.dev/fi_icon.png">
+  <meta name="twitter:image:alt" content="FluffyImages logo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      color: #00d4ff;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #b8b8b8;
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+    a {
+      color: #00d4ff;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+  <h1><img src="https://pub-a4443e381b024b27a2b33c5ed3c0d88e.r2.dev/fi_logo.png" alt="Fluffy Images" height="128px"></h1>
+  <p>This service provides image hosting.</p>
+</body>
+</html>`)
 })
 
 // Upload endpoint (Basic Auth required)
