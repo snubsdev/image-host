@@ -1,10 +1,7 @@
 {
-  "name": "r2-image-worker",
+  "name": "fluffy-images",
   "version": "2.0.0",
   "scripts": {
-    "dev": "wrangler dev ./src/index.ts",
-    "deploy": "wrangler deploy --minify ./src/index.ts",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "start": "node server.js"
   },
   "license": "MIT",
